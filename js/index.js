@@ -16,8 +16,8 @@ async function init(){
   const data = await RSS();
   const tagString = getTagString();
   document.getElementById('tag-input').value = tagString;
-  feeds = data.items;
-  upsertFeeds(data.items||[]);
+  feeds = data;
+  upsertFeeds(data||[]);
   renderUi();
 }
 
@@ -41,6 +41,13 @@ function applyTags(){
     tags.forEach(tag=>{
       if(feed.title.toLowerCase().includes(tag)){
         feed.matchScore++;
+      }
+      if(feed.content){
+        feed.content.forEach(content=>{
+          if(content.title.toLowerCase().includes(tag)){
+            feed.matchScore++;
+          }
+        });
       }
     });
   })

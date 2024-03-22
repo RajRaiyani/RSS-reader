@@ -13,15 +13,22 @@ function convertDescriptionToJSON(description){
 }
 
 async function RSS(){
-  const response = await fetch(constants.rssUrl);
-  const data = await response.json();
+  const promiseArray = [];
+  promiseArray.push(fetch(constants.rssUrl+'?gl=US').then(response => response.json()))
+  promiseArray.push(fetch(constants.rssUrl+'?gl=IN').then(response => response.json()))
+  promiseArray.push(fetch(constants.rssUrl+'?gl=IT').then(response => response.json()))
+  promiseArray.push(fetch(constants.rssUrl+'?gl=NZ').then(response => response.json()))
+  promiseArray.push(fetch(constants.rssUrl+'?gl=AU').then(response => response.json()))
+  promiseArray.push(fetch(constants.rssUrl+'?gl=SG').then(response => response.json()))
+  const result = await Promise.all(promiseArray);
+  const items = result.reduce((acc, val) => acc.concat(val.items), []);
   
-  data.items.forEach(item => {
+  items.forEach(item => {
     const list = convertDescriptionToJSON(item.content);
     item.content = list;
   });
 
-  return data;
+  return items;
 }
 
 export default RSS;

@@ -11,18 +11,20 @@
 
 <body>
 
+
   <h1>RSS News feed</h1>
-  <div style="margin-left: 1rem;">
+  <div class="header">
+    <p>countries : US, IN, NZ, SG, IT, AU</p>
     <textarea rows="3" cols="45" id="tag-input">
 
     </textarea>
     <button id="applyTag">apply</button>
     <button id="clearTag">clear</button>
+    <div>
+      Results : <span id="result-count"></span>
+    </div>
   </div>
-  <div id="result-count"></div>
-  <div id="container">
-
-  </div>
+  <div id="container"></div>
 
   <script src="./js/index.js" type="module"></script>
 

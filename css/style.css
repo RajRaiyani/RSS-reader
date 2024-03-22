@@ -7,6 +7,13 @@
 body {
   background-color: #e6e6e6;
 }
+.header{
+  margin-left: 1rem;
+  padding: 0.5rem;
+  background-color: inherit;
+  position: sticky;
+  top: 0;
+}
 .feed-card{
   border-radius: 5px;
   background-color: white;
