@@ -28,6 +28,7 @@ async function RSS(){
     item.content = list;
   });
 
+  items.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
   return items;
 }
 

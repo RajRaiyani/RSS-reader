@@ -17,12 +17,13 @@ function upsertFeeds(feeds){
 }
 
 function getFeeds(){
-    const data = localStorage.getItem('feeds');
+    let data = localStorage.getItem('feeds');
     if(!data){
         return [];
     }
-
-    return JSON.parse(data);
+    data = JSON.parse(data);
+    data.sort((a,b)=>new Date(b.pubDate)-new Date(a.pubDate));
+    return data;
 }
 
 function addTagString(tagString){

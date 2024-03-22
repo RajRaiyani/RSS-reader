@@ -52,7 +52,12 @@ function applyTags(){
     });
   })
   filteredFeeds = feeds.filter(feed=>feed.matchScore>0);
-  filteredFeeds.sort((a,b)=>b.matchScore-a.matchScore);
+  filteredFeeds.sort((a,b)=>{
+    if(a.matchScore === b.matchScore){
+      return new Date(b.pubDate)-new Date(a.pubDate);
+    }
+    return b.matchScore - a.matchScore;
+  });
   setResultCount(filteredFeeds.length);
   renderFeeds('container',filteredFeeds);
 }
